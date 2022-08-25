@@ -42,7 +42,7 @@ def do_clean(number=0):
         # except the newest archive
         run("cd /data/web_static/releases ; rm `ls -t | awk 'NR>1'`")
 
-    if number == 2:
+    if num == 2:
         # Move locally into "versions" folder to be able to remove archives y
         # se encadena comando para eliminar todos los archivos viejos salvo los
         # ultimos dos
