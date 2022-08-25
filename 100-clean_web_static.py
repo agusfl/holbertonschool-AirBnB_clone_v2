@@ -16,7 +16,7 @@ the /data/web_static/releases folder of both of your web servers
 - All remote commands must be executed on both of your web servers (using
 the env.hosts = ['<IP web-01>', 'IP web-02'] variable in your script)
 
-Info delete old files: 
+Info delete old files:
 https://stackoverflow.com/questions/25785/delete-all-but-the-most-recent-x-
 files-in-bash
 """
