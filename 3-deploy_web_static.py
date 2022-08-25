@@ -34,7 +34,7 @@ def deploy():
     path = do_pack()
 
     # Return False if no archive has been created
-    if exists(path) is False:
+    if path is None:
         return False
 
     # Call the do_deploay function (made in task 2) with the new path
