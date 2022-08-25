@@ -28,13 +28,26 @@ def do_clean(number=0):
     Function that deletes out-of-date archives, depending of the argument
     passed. By default number is set to 0.
     """
-    number = int(number)
+    # Se pasa number a tipo int para poder compararlo en if siguiente con
+    # numeros (integers)
+    num = int(number)
 
-    if number == 0:
-        number = 2
-    else:
-        number += 1
+    if num == 0 or num == 1:
+        # Move locally into "versions" folder to be able to remove archives y
+        # se encadena comando para eliminar todos los archivos viejos salvo el
+        # ultimo,se encadena con ; porque sino tomaba los comandos por separado
+        local("cd versions ; rm `ls -t | awk 'NR>1'`")
 
-    local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
-    path = '/data/web_static/releases'
-    run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
+        # Move to path indicated in command in servers and remove all files
+        # except the newest archive
+        run("cd /data/web_static/releases ; rm -rf `ls -t | awk 'NR>1'`")
+
+    if num == 2:
+        # Move locally into "versions" folder to be able to remove archives y
+        # se encadena comando para eliminar todos los archivos viejos salvo los
+        # ultimos dos
+        local("cd versions ; rm `ls -t | awk 'NR>2'`")
+
+        # Move to path indicated in command in servers and remove all files
+        # except the 2 newest archives
+        run("cd /data/web_static/releases ; rm -rf `ls -t | awk 'NR>2'`")
