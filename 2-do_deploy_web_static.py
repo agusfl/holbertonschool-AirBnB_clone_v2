@@ -45,7 +45,7 @@ def do_deploy(archive_path):
         path = "/data/web_static/releases/" + filename_no_ext + "/"
         # Create directory if not exits already
         run("mkdir -p " + path)
-        # Uncompress archive
+        # Uncompress archive that was upload with the previous "put" command
         run("tar -xzf /tmp/" + filename + " -C " + path)
         # Remove archive from server
         run("rm /tmp/{}".format(filename))
