@@ -19,6 +19,9 @@ env.hosts = ['<IP web-01>', 'IP web-02'] variable in your script)
 False
 - You must use this script to deploy it on your servers: xx-web-01 and
 xx-web-02
+Info put and run:
+https://www.digitalocean.com/community/tutorials/how-to-use-fabric-to-automate
+-administration-tasks-and-deployments
 """
 from fabric.api import run, put, env
 from os.path import exists  # To check if a file exists
@@ -43,17 +46,24 @@ def do_deploy(archive_path):
         filename_no_ext = filename.split(".")[0]
         # Ruta completa hacia el archivo SIN extension
         path = "/data/web_static/releases/" + filename_no_ext + "/"
+
         # Create directory if not exits already
         run("mkdir -p " + path)
         # Uncompress archive that was upload with the previous "put" command
+        # and save it in a new path that is created with -C option
         run("tar -xzf /tmp/" + filename + " -C " + path)
+
+        # Le cambiamos el nombre al archivo que creamos recien con la
+        # info descomprimida
+        run("mv " + path + "web_static/*" + " " + path)
+
         # Remove archive from server
         run("rm /tmp/{}".format(filename))
-        run("mv " + path + "web_static/* " + path)
         # Delete archive from the server
         run("rm -rf " + path + "web_static")
         # Delete symbolic link from the server
         run("rm -rf /data/web_static/current")
+
         # Se crea un symbolic link en el servidor con la nueva ruta (sin ext)
         run("ln -s " + path + " /data/web_static/current")
         print("New version deployed!")
