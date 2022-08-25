@@ -28,22 +28,26 @@ def do_clean(number=0):
     Function that deletes out-of-date archives, depending of the argument
     passed. By default number is set to 0.
     """
-    if number == 0 or number == 1:
-        # Move locally into versions folder to be able to remove archives
-        local("cd versions")
-        # Comando para eliminar todos los archivos viejos salvo el ultimo
-        local("rm `ls -t | awk 'NR>1'`")
-        # Move to path indicated in command in servers
-        run("cd /data/web_static/releases")
-        # Comando para eliminar todos los archivos viejos salvo los 2 ultimos
-        run("rm `ls -t | awk 'NR>1'`")
+    # Se pasa number a tipo int para poder compararlo en if siguiente con
+    # numeros (integers)
+    num = int(number)
+
+    if num == 0 or num == 1:
+        # Move locally into "versions" folder to be able to remove archives y
+        # se encadena comando para eliminar todos los archivos viejos salvo el
+        # ultimo,se encadena con ; porque sino tomaba los comandos por separado
+        local("cd versions ; rm `ls -t | awk 'NR>1'`")
+
+        # Move to path indicated in command in servers and remove all files
+        # except the newest archive
+        run("cd /data/web_static/releases ; rm `ls -t | awk 'NR>1'`")
 
     if number == 2:
-        # Move locally into versions folder to be able to remove archives
-        local("cd versions")
-        # Comando para eliminar todos los archivos viejos salvo el ultimo
-        local("rm `ls -t | awk 'NR>2'`")
-        # Move to path indicated in command in servers
-        run("cd /data/web_static/releases")
-        # Comando para eliminar todos los archivos viejos salvo los 2 ultimos
-        run("rm `ls -t | awk 'NR>2'`")
+        # Move locally into "versions" folder to be able to remove archives y
+        # se encadena comando para eliminar todos los archivos viejos salvo los
+        # ultimos dos
+        local("cd versions ; rm `ls -t | awk 'NR>2'`")
+
+        # Move to path indicated in command in servers and remove all files
+        # except the 2 newest archives
+        run("cd /data/web_static/releases ; rm `ls -t | awk 'NR>2'`")
