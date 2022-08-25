@@ -34,9 +34,9 @@ def do_pack():
         # Create directory "versions" locally
         local("mkdir -p versions")
         # Creo el nombre de la forma que lo piden
-        archive_name = f"versions/web_static_{time}.tgz"
+        archive_name = "versions/web_static_{}.tgz".format(time)
         # Se crea el "archive_name" de los contenidos dentro de web_static
-        local(f"tar -cvzf {archive_name} web_static/")
+        local("tar -cvzf {} web_static/").format(archive_name)
         # Se retorna el archive_name
         return archive_name
     except Exception:
