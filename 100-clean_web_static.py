@@ -36,18 +36,18 @@ def do_clean(number=0):
         # Move locally into "versions" folder to be able to remove archives y
         # se encadena comando para eliminar todos los archivos viejos salvo el
         # ultimo,se encadena con ; porque sino tomaba los comandos por separado
-        local("cd versions ; ls -t | tail -n1 | xargs rm -rf")
+        local("cd versions ; rm `ls -t | awk 'NR>1'`")
 
         # Move to path indicated in command in servers and remove all files
         # except the newest archive
-        run("cd /data/web_static/releases ; ls -t | tail -n1 | xargs rm -rf")
+        run("cd /data/web_static/releases/ ; rm `ls -t | awk 'NR>1'`")
 
     if num == 2:
         # Move locally into "versions" folder to be able to remove archives y
         # se encadena comando para eliminar todos los archivos viejos salvo los
         # ultimos dos
-        local("cd versions ; ls -t | tail -n2 | xargs rm -rf")
+        local("cd versions ; rm `ls -t | awk 'NR>2'`")
 
         # Move to path indicated in command in servers and remove all files
         # except the 2 newest archives
-        run("cd /data/web_static/releases ; ls -t | tail -n2 | xargs rm -rf")
+        run("cd /data/web_static/releases/ ; rm -rf `ls -t | awk 'NR>2'`")
