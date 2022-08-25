@@ -44,9 +44,9 @@ def do_clean(number=0):
     # Move locally into "versions" folder to be able to remove archives y se
     # encadena comando para eliminar todos los archivos viejos salvo el numero
     # indicado,se encadena con ; porque sino tomaba los comandos por separado
-    local('cd versions ; rm `ls -t | awk "NR>{}"`'.format(number))
+    local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
 
     # Move to path indicated in command in servers and remove all files
     # except the number indicated
     path = '/data/web_static/releases'
-    run('cd {} ; rm `ls -t | awk "NR>{}"`'.format(path, number))
+    run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
