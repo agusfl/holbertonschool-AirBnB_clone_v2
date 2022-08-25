@@ -15,6 +15,10 @@ the versions folder
 the /data/web_static/releases folder of both of your web servers
 - All remote commands must be executed on both of your web servers (using
 the env.hosts = ['<IP web-01>', 'IP web-02'] variable in your script)
+
+Info delete old files: 
+https://stackoverflow.com/questions/25785/delete-all-but-the-most-recent-x-
+files-in-bash
 """
 from fabric.api import run, env, local
 # Seteo environmental variables para los servidores 4390-web-01 and 4390-web-02
@@ -40,9 +44,9 @@ def do_clean(number=0):
     # Move locally into "versions" folder to be able to remove archives y se
     # encadena comando para eliminar todos los archivos viejos salvo el numero
     # indicado,se encadena con ; porque sino tomaba los comandos por separado
-    local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
+    local('cd versions ; rm `ls -t | awk "NR>{}"`'.format(number))
 
     # Move to path indicated in command in servers and remove all files
     # except the number indicated
     path = '/data/web_static/releases'
-    run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
+    run('cd {} ; rm `ls -t | awk "NR>{}"`'.format(path, number))
