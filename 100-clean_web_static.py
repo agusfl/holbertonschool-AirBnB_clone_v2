@@ -50,4 +50,4 @@ def do_clean(number=0):
 
         # Move to path indicated in command in servers and remove all files
         # except the 2 newest archives
-        run("cd /data/web_static/releases ; rm `ls -t | awk 'NR>2'`")
+        run("cd /data/web_static/releases/ ; rm `ls -t | awk 'NR>2'`")
