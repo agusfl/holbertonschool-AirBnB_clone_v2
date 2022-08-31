@@ -30,7 +30,8 @@ def HBNB():
 @app.route("/c/<text>", strict_slashes=False)
 def c_text(text):
     """Function, that return a prompt saying: C and text passed"""
-    return f"C {text}"
+    replace = text.replace("_", " ")
+    return f"C {replace}"
 
 
 if __name__ == '__main__':
