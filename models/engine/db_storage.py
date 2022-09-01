@@ -103,3 +103,10 @@ class DBStorage:
         # Scoped session only one session per thread
         Session = scoped_session(new_session)
         self.__session = Session
+
+    def close(self):
+        '''
+        Call remove() method on the private session attribute
+        Info: https://docs.sqlalchemy.org/en/13/orm/contextual.html
+        '''
+        self.__session.remove()
