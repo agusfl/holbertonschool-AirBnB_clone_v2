@@ -23,8 +23,9 @@ def states_list():
     """
     Import data from storage
     """
-    states = storage.all("State").values()
-    return render_template("7-states_list.html", states=states)
+    state_objs = [s for s in storage.all("State").values()]
+    return render_template('7-states_list.html',
+                           state_objs=state_objs)
 
 
 if __name__ == "__main__":
