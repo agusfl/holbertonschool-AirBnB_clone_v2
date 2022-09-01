@@ -50,7 +50,7 @@ class DBStorage:
                 data = self.__session.query(classes[clase]).all()
                 for obj in data:
                     # Se obtiene la key para setear el obj en el dic a retornar
-                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
                     # Se agregan los objetos en el diccionario a retornar
                     dic_return[key] = obj
             return dic_return

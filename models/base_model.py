@@ -45,7 +45,8 @@ class BaseModel:
         Returns a string representation of the instance
         --> Print to_dict() method
         """
-        return f"[{self.__class__.__name__}] ({self.id}) {self.to_dict()}"
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
+                                      self.id, self.__dict__))
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
