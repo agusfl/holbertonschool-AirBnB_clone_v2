@@ -25,6 +25,7 @@ HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
 
 from flask import Flask, render_template
 from models import storage  # use storage for fetching data
+from models import State  # Importo state para poder usar la clase
 
 # Creando una instancia de flask con el nombre del archivo nuestro
 app = Flask(__name__)
@@ -43,7 +44,9 @@ def states_list():
     """
     Import data from storage
     """
-    states = storage.all("State").values()
+    # Le paso la clase State al metodo all() de storage para que me traiga
+    # todos los objetos de tipo State
+    states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
 
 
