@@ -25,17 +25,12 @@ class State(BaseModel, Base):
         # Seteamos un getter (usando el decorador: @property)
         @property
         def cities(self):
-            """
-            Getter attribute cities that returns the list of City instances
-            with state_id equals to the current State.id => It will be the
-            FileStorage relationship between State and City.
-            """
+            all_cities = models.storage.all(City).values()
+
             return_list = []
-            # Guardamos todas las ciudades que haya en la clase City
-            cities = models.storage.all(City).values()
-            for city in cities:
+            for city in all_cities:
                 # Se compara id del objeto de tipo State con City
-                if self.id == city.state_id:
+                if (city.state_id == self.id):
                     # Se guarda el resultado en la lista a retornar
-                    return_list.append(models.storage.all(City)[city])
+                    return_list.append(city)
             return return_list
