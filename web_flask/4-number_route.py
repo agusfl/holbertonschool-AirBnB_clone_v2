@@ -37,7 +37,7 @@ def HBNB():
 def c_text(text):
     """Function, that return a prompt saying: C and text passed"""
     replace = text.replace("_", " ")
-    return f"C {replace}"
+    return "C {}".format(replace)
 
 
 @app.route("/python", defaults={'text': "is cool"}, strict_slashes=False)
@@ -50,7 +50,7 @@ def python_text(text):
     -parameters
     """
     replace = text.replace("_", " ")
-    return f"Python {replace}"
+    return "Python {}".format(replace)
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
@@ -59,7 +59,7 @@ def number(n):
     Function, that display “n is a number” only if n is an integer
     Info: https://uniwebsidad.com/libros/explore-flask/chapter-6/url-converters
     """
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 if __name__ == '__main__':
