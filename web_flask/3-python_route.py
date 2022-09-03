@@ -36,7 +36,7 @@ def HBNB():
 def c_text(text):
     """Function, that return a prompt saying: C and text passed"""
     replace = text.replace("_", " ")
-    return f"C {replace}"
+    return "C {}".format(replace)
 
 
 @app.route("/python", defaults={'text': "is cool"}, strict_slashes=False)
@@ -49,7 +49,7 @@ def python_text(text):
     -parameters
     """
     replace = text.replace("_", " ")
-    return f"Python {replace}"
+    return "Python {}".format(replace)
 
 
 if __name__ == '__main__':
