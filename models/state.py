@@ -21,16 +21,16 @@ class State(BaseModel, Base):
         cities = relationship('City', backref="state", cascade="all ,\
                                 delete-orphan")
     else:
-        # Si se llega a este else es porque se esata en el storage: FileStorage
-        # Seteamos un getter (usando el decorador: @property)
-        @property
-        def cities(self):
-            all_cities = models.storage.all(City).values()
+        name =" "
 
-            return_list = []
-            for city in all_cities:
-                # Se compara id del objeto de tipo State con City
-                if (city.state_id == self.id):
-                    # Se guarda el resultado en la lista a retornar
-                    return_list.append(city)
-            return return_list
+    @property
+    def cities(self):
+        all_cities = models.storage.all(City).values()
+
+        return_list = []
+        for city in all_cities:
+            # Se compara id del objeto de tipo State con City
+            if (city.state_id == self.id):
+                # Se guarda el resultado en la lista a retornar
+                return_list.append(city)
+        return return_list
