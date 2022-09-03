@@ -25,12 +25,10 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        all_cities = models.storage.all(City).values()
-
-        return_list = []
-        for city in all_cities:
-            # Se compara id del objeto de tipo State con City
-            if (city.state_id == self.id):
-                # Se guarda el resultado en la lista a retornar
-                return_list.append(city)
-        return return_list
+        """devolver una lista de instancias de city"""
+        inst_list = []
+        list_objects = models.storage.all(City)
+        for city in list_objects.values():
+            if city.state_id == self.id:
+                inst_list.append(city)
+        return inst_list
