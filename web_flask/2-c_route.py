@@ -31,7 +31,7 @@ def HBNB():
 def c_text(text):
     """Function, that return a prompt saying: C and text passed"""
     replace = text.replace("_", " ")
-    return f"C {replace}"
+    return "C {}".format(replace)
 
 
 if __name__ == '__main__':
