@@ -61,20 +61,15 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """
-        Delete obj from __objects if it’s inside - if obj is equal to None,
-        the method should not do anything.
-        """
-        if obj is None:
-            pass
+        """Borrar un objeto"""
+        if not obj:
+            return
         else:
-            # Creamos la key - es el: nombre de la clase + punto + id
-            key = f"{obj.__class__.__name__}.{obj.id}"
-            if self.__objects[key] is not None:
-                del self.__objects[key]
-                self.save()
-            else:
-                pass
+            cp_objects = FileStorage.__objects.copy()
+            for key, value in cp_objects.items():
+                if value == obj:
+                    del FileStorage.__objects[key]
+                    self.save()
 
     def close(self):
         """
