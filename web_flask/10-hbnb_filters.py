@@ -31,6 +31,8 @@ name (A->Z)
 from flask import Flask, render_template
 from models import storage  # use storage for fetching data
 from models import State  # Importo state para poder usar la clase
+from models.amenity import Amenity
+from models.place import Place
 
 # Creando una instancia de flask con el nombre del archivo nuestro
 app = Flask(__name__)
