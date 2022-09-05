@@ -44,17 +44,6 @@ def tear_down(self):
     storage.close()
 
 
-@app.route("/states", strict_slashes=False)
-def states_list():
-    """
-    Import data from storage
-    """
-    # Le paso la clase State al metodo all() de storage para que me traiga
-    # todos los objetos de tipo State
-    states = storage.all(State).values()
-    return render_template("7-states_list.html", states=states)
-
-
 @app.route("/hbnb_filters", strict_slashes=False)
 def states_list():
     """Import data from storage"""
