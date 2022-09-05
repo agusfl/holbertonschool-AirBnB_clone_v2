@@ -49,9 +49,10 @@ def tear_down(self):
 @app.route("/hbnb_filters", strict_slashes=False)
 def states_list():
     """Import data from storage"""
+    # Importamos los estados (States)
     states = storage.all(State).values()
+    # Importamos los amenities
     amenities = storage.all(Amenity).values()
-    print(amenities)
     return render_template("10-hbnb_filters.html", states=states,
                            amenities=amenities)
 
