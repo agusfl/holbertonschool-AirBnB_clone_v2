@@ -53,7 +53,7 @@ def states_list():
     # Le paso la clase State al metodo all() de storage para que me traiga
     # todos los objetos de tipo State
     states = storage.all(State).values()
-    return render_template("9-states.html", states=states)
+    return render_template("7-states_list.html", states=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
